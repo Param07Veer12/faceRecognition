@@ -1,0 +1,53 @@
+PODS:
+  - FaceSDK (6.4.2321):
+    - RegulaCommon (= 7.5.935)
+  - Flutter (1.0.0)
+  - flutter_face_api (6.4.875):
+    - FaceSDK (= 6.4.2321)
+    - Flutter
+  - image_picker_ios (0.0.1):
+    - Flutter
+  - path_provider_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
+  - RegulaCommon (7.5.935)
+  - sqflite_darwin (0.0.4):
+    - Flutter
+    - FlutterMacOS
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - flutter_face_api (from `.symlinks/plugins/flutter_face_api/ios`)
+  - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
+  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
+  - sqflite_darwin (from `.symlinks/plugins/sqflite_darwin/darwin`)
+
+SPEC REPOS:
+  trunk:
+    - FaceSDK
+    - RegulaCommon
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  flutter_face_api:
+    :path: ".symlinks/plugins/flutter_face_api/ios"
+  image_picker_ios:
+    :path: ".symlinks/plugins/image_picker_ios/ios"
+  path_provider_foundation:
+    :path: ".symlinks/plugins/path_provider_foundation/darwin"
+  sqflite_darwin:
+    :path: ".symlinks/plugins/sqflite_darwin/darwin"
+
+SPEC CHECKSUMS:
+  FaceSDK: e96016e36d5507ad9d9ee3b011d735f5fe51829f
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  flutter_face_api: cc9d888512d411ebf7cbda7e3d3fe6e8f9a3b076
+  image_picker_ios: 7fe1ff8e34c1790d6fff70a32484959f563a928a
+  path_provider_foundation: 080d55be775b7414fd5a5ef3ac137b97b097e564
+  RegulaCommon: 2a6406d2d3ebbd720b66a9cfa5b9631701d343eb
+  sqflite_darwin: 20b2a3a3b70e43edae938624ce550a3cbf66a3d0
+
+PODFILE CHECKSUM: 4305caec6b40dde0ae97be1573c53de1882a07e5
+
+COCOAPODS: 1.16.2
