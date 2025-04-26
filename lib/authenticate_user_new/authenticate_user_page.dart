@@ -11,8 +11,9 @@ import 'package:new_face_ai_project/capture_face_view.dart' show CaptureFaceView
 import 'package:new_face_ai_project/constants/colors.dart';
 import 'package:new_face_ai_project/constants/custom_button.dart';
 import 'package:new_face_ai_project/constants/database_helper.dart';
+import 'package:new_face_ai_project/constants/identifying_loader.dart';
 import 'package:new_face_ai_project/models.dart';
-import 'package:new_face_ai_project/snack_bars.dart' show errorSnackBar;
+import 'package:new_face_ai_project/snack_bars.dart' show errorSnackBar, successSnackBar;
 
 class AuthenticateNewUserPage extends StatefulWidget {
   const AuthenticateNewUserPage({super.key});
@@ -51,10 +52,12 @@ Future<Uint8List?> convertFileToUint8List(File? file) async {
       autoCapture: true,
       defaultCameraLens: CameraLens.front,
       onCapture: (File? image) async {
+  showIdentifyingLoader(context); // Show loader
 
 
-        setState(() => _capturedImage = image);
-Uint8List? imageBytes = await convertFileToUint8List(_capturedImage);
+
+
+Uint8List? imageBytes = await convertFileToUint8List(image);
 
         mfImage1 = MatchFacesImage(imageBytes!, ImageType.PRINTED);
 
@@ -62,8 +65,11 @@ Uint8List? imageBytes = await convertFileToUint8List(_capturedImage);
     final users = await dbHelper.getAllUsers();
 
     if (users.isEmpty) {
-      errorSnackBar(context, 'No users registered');
-      setState(() => isMatching = false);
+      showIdentifyingLoader(context, show: false); 
+            showErrorDialog(context, 'No users registered');
+
+      // Hide loader
+
       return;
     }
 
@@ -87,19 +93,32 @@ mfImage2 = MatchFacesImage(base64Decode(user.image), ImageType.PRINTED);
                           if (similarity != 'error' &&
                               double.parse(similarity) > 90.00) {
           matchFound = true;
-          Navigator.push(context, 
-            MaterialPageRoute(
-              builder: (context) => UserAuthenticatedPage(name: user.name),
-          ));
+                showIdentifyingLoader(context, show: false); // Hide loader
+            showSuccessDialog(context, user.name);
+
+
+          // Navigator.push(context, 
+          //   MaterialPageRoute(
+          //     builder: (context) => UserAuthenticatedPage(name: user.name),
+          // ));
           break;
         }
       } catch (e) {
-        print('Error comparing faces: $e');
+        // print('Error comparing faces: $e');
+                showIdentifyingLoader(context, show: false); // Hide loader
+
+           showErrorDialog(context, 'Error comparing faces: $e');
+
+
       }
     }
 
     if (!matchFound) {
-      errorSnackBar(context, 'No matching user found');
+           showIdentifyingLoader(context, show: false); // Hide loader
+
+   showErrorDialog(context, 'No matching user found');
+
+
     }
 
       },
@@ -118,7 +137,10 @@ mfImage2 = MatchFacesImage(base64Decode(user.image), ImageType.PRINTED);
       home: Scaffold(
           appBar: AppBar(
             title: const Text('Authenticate'),
-            
+              leading: IconButton(
+    icon: const Icon(Icons.arrow_back),
+    onPressed: () => Navigator.of(context).pop(),
+  ),
           ),
           body: Builder(builder: (context) {
             if (_capturedImage != null) {
