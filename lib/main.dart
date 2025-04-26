@@ -1,3 +1,4 @@
+import 'package:face_camera/face_camera.dart';
 import 'package:flutter/material.dart';
 import 'package:new_face_ai_project/authenticate_user/authenticate_user_page.dart';
 import 'package:new_face_ai_project/authenticate_user_new/authenticate_user_page.dart';
@@ -5,7 +6,12 @@ import 'package:new_face_ai_project/constants/colors.dart';
 import 'package:new_face_ai_project/constants/custom_button.dart';
 import 'package:new_face_ai_project/face_authentication.dart';
 
-void main() {
+Future<void> main() async {
+    WidgetsFlutterBinding.ensureInitialized();
+
+  await FaceCamera.initialize();
+
+
   runApp(const MyApp());
 }
 

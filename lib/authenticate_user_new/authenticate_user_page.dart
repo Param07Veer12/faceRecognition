@@ -107,6 +107,7 @@ mfImage2 = MatchFacesImage(base64Decode(user.image), ImageType.PRINTED);
         //Do something
       },
     );
+      // _initializeCamera();
     // TODO: implement initState
     super.initState();
   }
@@ -116,7 +117,8 @@ mfImage2 = MatchFacesImage(base64Decode(user.image), ImageType.PRINTED);
     return MaterialApp(
       home: Scaffold(
           appBar: AppBar(
-            title: const Text('FaceCamera example app'),
+            title: const Text('Authenticate'),
+            
           ),
           body: Builder(builder: (context) {
             if (_capturedImage != null) {
