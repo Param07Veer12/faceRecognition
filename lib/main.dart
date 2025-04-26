@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:new_face_ai_project/authenticate_user/authenticate_user_page.dart';
+import 'package:new_face_ai_project/authenticate_user_new/authenticate_user_page.dart';
 import 'package:new_face_ai_project/constants/colors.dart';
 import 'package:new_face_ai_project/constants/custom_button.dart';
 import 'package:new_face_ai_project/face_authentication.dart';
@@ -77,7 +78,7 @@ class HomePage extends StatelessWidget {
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => AuthenticateUserPage(),
+                      builder: (context) => AuthenticateNewUserPage(),
                     ),
                   );
                 },
