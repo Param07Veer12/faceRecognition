@@ -9,7 +9,9 @@ import 'package:new_face_ai_project/face_authentication.dart';
 Future<void> main() async {
     WidgetsFlutterBinding.ensureInitialized();
 
-  await FaceCamera.initialize();
+  await FaceCamera.initialize(
+    
+  );
 
 
   runApp(const MyApp());

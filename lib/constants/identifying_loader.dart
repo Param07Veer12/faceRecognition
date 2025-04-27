@@ -40,7 +40,11 @@ void showIdentifyingLoader(BuildContext context, {bool show = true}) {
   }
 }
 
-void showSuccessDialog(BuildContext context, String name) {
+void showSuccessDialog({
+  required BuildContext context,
+  required String name,
+  required VoidCallback onOkPressed,
+}) {
   showDialog(
     context: context,
     barrierDismissible: false,
@@ -52,9 +56,9 @@ void showSuccessDialog(BuildContext context, String name) {
           TextButton(
             onPressed: () {
               Navigator.of(context).pop(); // Close the dialog
-             
+              onOkPressed(); // Execute callback
             },
-            child: const Text('Ok'),
+            child: const Text('OK'),
           ),
         ],
       );
@@ -62,7 +66,11 @@ void showSuccessDialog(BuildContext context, String name) {
   );
 }
 
-void showErrorDialog(BuildContext context, String message) {
+void showErrorDialog({
+  required BuildContext context,
+  required String message,
+  VoidCallback? onOkPressed, // Optional callback
+}) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -71,7 +79,10 @@ void showErrorDialog(BuildContext context, String message) {
         content: Text(message),
         actions: [
           TextButton(
-            onPressed: () => Navigator.of(context).pop(),
+            onPressed: () {
+              Navigator.of(context).pop(); // Close the dialog
+              onOkPressed?.call(); // Execute callback if provided
+            },
             child: const Text('OK'),
           ),
         ],
