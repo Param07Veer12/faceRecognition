@@ -5,6 +5,7 @@ import 'package:new_face_ai_project/authenticate_user_new/authenticate_user_page
 import 'package:new_face_ai_project/constants/colors.dart';
 import 'package:new_face_ai_project/constants/custom_button.dart';
 import 'package:new_face_ai_project/face_authentication.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 Future<void> main() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -48,9 +49,35 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+
+  @override
+  void initState() {
+    requestCameraAndAudioPermissions();
+    // TODO: implement initState
+    super.initState();
+      
+  }
+  Future<void> requestCameraAndAudioPermissions() async {
+  var statuses = await [
+    Permission.camera,
+    Permission.microphone,
+  ].request();
+
+  if (statuses[Permission.camera]!.isGranted && statuses[Permission.microphone]!.isGranted) {
+    print("Camera and Microphone permissions granted");
+  } else {
+    print("Permissions not granted. Please enable from settings.");
+    openAppSettings(); // Optionally navigate user to settings
+  }
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,7 +113,7 @@ class HomePage extends StatelessWidget {
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => AuthenticateNewUserPage(),
+                      builder: (context) => AuthenticateNewUserPageFace(),
                     ),
                   );
                 },
